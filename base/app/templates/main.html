@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="static/js/jquery-3.3.1.js"></script>
+    <script src="static/js/main.js"></script>
+</head>
+<body>
+<label for="activate">Включить сервис:</label>
+<input id="activate" type="checkbox" name="a">
+{% for key, value in app.config.services.items() %}
+<div id="message"></div>
+<div class="service" data-name={{value.name}}>
+<div class="srv_name" data-name={{value.name}}>Сервис: {{value.name}}</div>
+<div class="srv_status" data-name={{value.name}}>Статус сервиса: Не запущен</div>
+    <p><button class="start" disabled>Запустить</button></p>
+    <p><button class="restart" disabled>Перезапустить</button></p>
+    <p><button class="stop" disabled>Остановить</button></p>
+</div>
+{% endfor %}
+</body>
+</html>

@@ -1,0 +1,14 @@
+postgres:
+  database: app
+  user: app
+  password: app
+  host: localhost
+  port: 5432
+  minsize: 1
+  maxsize: 5
+
+services:
+  main:
+    name: 'main'
+    path: '/home/hilinetria/PycharmProjects/Test/service/server.py'
+    command: 'python'
