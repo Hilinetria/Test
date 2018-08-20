@@ -102,6 +102,7 @@ async def activate_handler(request, checked=True):
 async def check_activation_on_start(request):
     success = True
     disabled = False
+    text = 'Service activated!'
     async with request.app['db'].acquire() as conn:
         try:
             record = await check_activation(conn)
@@ -136,6 +137,8 @@ async def websocket_handler(request):
             handler = __handler_map.get(json_data.get('type'))
             if msg.data == 'close':
                 await ws.close()
+                if request.app['websockets'].get(ws):
+                    del request.app['websockets'][ws]
             elif handler:
                 result = await handler[0](request, *[json_data.get(param) for param in handler[1:]])
                 await ws.send_json(result)

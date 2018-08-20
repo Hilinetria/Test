@@ -55,7 +55,8 @@ async def check_processes(app, seconds=10):
                 if service.returncode:
                     services_status['status'] = 0
                     services_status['text'] = 'Service stopped!'
-                    del app['services'][key]
+                    if app['services'].get(key):
+                        del app['services'][key]
                 else:
                     # print('123', services)
                     services_status['status'] = 1
